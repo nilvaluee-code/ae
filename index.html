@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ER:LC Server Status</title>
+</head>
+<body>
+
+<h1>ER:LC Server</h1>
+<p>Players: <span id="players">Loading...</span></p>
+<p>Queue: <span id="queue">Loading...</span></p>
+
+<script>
+fetch("/api/server")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("players").textContent = data.CurrentPlayers;
+    document.getElementById("queue").textContent = data.QueuePlayers;
+  })
+  .catch(() => {
+    document.getElementById("players").textContent = "Error";
+    document.getElementById("queue").textContent = "Error";
+  });
+</script>
+
+</body>
+</html>
